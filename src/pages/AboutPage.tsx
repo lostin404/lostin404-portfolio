@@ -1,5 +1,6 @@
 import { PageHeader } from '../components/PageHeader'
 import { AboutStory } from '../components/About'
+import { AboutGallery } from '../components/AboutGallery'
 import { Ribbons } from '../components/Ribbons'
 import { Toolkit } from '../components/Toolkit'
 import { CtaBand } from '../components/CtaBand'
@@ -20,6 +21,7 @@ export default function AboutPage() {
         lede={`${brand.person} — ${brand.role}. ${brand.location}.`}
       />
       <AboutStory />
+      <AboutGallery />
       <Ribbons />
       <Toolkit />
       <CtaBand

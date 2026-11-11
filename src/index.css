@@ -505,3 +505,13 @@ img {
     }
   }
 }
+
+/* horizontal photo strip: scrollable, without a visible scrollbar */
+@layer components {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
