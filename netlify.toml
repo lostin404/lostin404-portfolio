@@ -1,0 +1,16 @@
+# Netlify build settings for the LOSTIN404 portfolio (Vite + React Router SPA).
+# The SPA fallback (/* -> /index.html 200) lives in public/_redirects, which Vite copies
+# into dist. It is deliberately NOT repeated here, so there is a single redirect rule.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Vite fingerprints everything in /assets, so those files can be cached indefinitely.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
