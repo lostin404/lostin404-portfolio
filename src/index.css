@@ -515,3 +515,37 @@ img {
     display: none;
   }
 }
+
+/* Background paths (contact header): a highlight travels along each faint curve.
+   Highlight paths use pathLength="1", so dash lengths are fractions of the whole curve. */
+@layer components {
+  .bg-paths .bg-path-flow {
+    stroke-dasharray: 0.3 1;
+    stroke-dashoffset: 0.3;
+    animation-name: bg-path-travel;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: var(--paths-state, running);
+  }
+
+  @keyframes bg-path-travel {
+    0% {
+      stroke-dashoffset: 0.3;
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: -1;
+      opacity: 0.6;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-paths .bg-path-flow {
+      animation: none;
+      display: none;
+    }
+  }
+}

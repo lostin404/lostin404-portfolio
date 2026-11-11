@@ -3,11 +3,23 @@ import { ArrowUpRight, Mail, MapPin } from 'lucide-react'
 import { CharacterBlurReveal } from './CharacterBlurReveal'
 import { Reveal } from './Reveal'
 import { SocialIcon } from './SocialIcon'
+import { BackgroundPaths } from './BackgroundPaths'
+import { ContactForm } from './ui/contact-form'
 import { brand, socials } from '../data/site'
 
 export function Contact() {
   return (
-    <section className="bg-ink pb-[var(--section-y)] pt-32 md:pt-44" aria-labelledby="contact-title">
+    <section
+      className="relative isolate overflow-hidden bg-ink pb-[var(--section-y)] pt-32 md:pt-44"
+      aria-labelledby="contact-title"
+    >
+      {/* decorative paths behind the heading, faded out before the details and form */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(100svh,58rem)] opacity-90 [mask-image:linear-gradient(to_bottom,#000_0%,#000_55%,transparent_100%)]"
+      >
+        <BackgroundPaths />
+      </div>
       <div className="wrap">
         <p className="label mb-6 flex items-center gap-2.5">
           <span className="status-dot" aria-hidden="true" />[ Contact ] — Available for work
@@ -90,6 +102,11 @@ export function Contact() {
               </li>
             </ul>
           </Reveal>
+        </div>
+
+        {/* WhatsApp enquiry form */}
+        <div className="mt-20 md:mt-28">
+          <ContactForm />
         </div>
 
         {/* Follow — verified accounts only */}

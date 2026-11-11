@@ -30,8 +30,10 @@ export const brand = {
   intro:
     'Dubai-based creative professional and design brand — premium brand visuals, cinematic content, web experiences and social media strategy for brands that refuse to blend in.',
   email: 'lostin404ae@gmail.com',
-  whatsappDisplay: '+971 52 341 2447',
-  whatsappUrl: 'https://wa.me/971523412447',
+  /** WhatsApp in international format without '+', as wa.me expects */
+  whatsappNumber: '971581598055',
+  whatsappDisplay: '+971 58 159 8055',
+  whatsappUrl: 'https://wa.me/971581598055',
   founded: 2023,
 }
 
