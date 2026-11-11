@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lostin404space.netlify.app/sitemap.xml

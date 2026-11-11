@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { ClipReveal } from '../components/ClipReveal'
+import { useSeo } from '../hooks/useSeo'
 
 export default function NotFound() {
+  useSeo('/404', { noindex: true })
   return (
     <section className="grid min-h-[100svh] place-items-center bg-deep px-6 text-center">
       <div>

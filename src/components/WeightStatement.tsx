@@ -8,7 +8,7 @@ const LINES = ['FIND YOURSELF', 'IN GLITCH.']
  * weight = 300 + progress × 500, driven through the real `wght` axis of Inter Variable,
  * so it interpolates continuously and reverses when scrolling back up.
  *
- * The stage is sticky for one extra viewport of scroll. Lines never wrap (nowrap + a font
+ * The stage is sticky for under one extra viewport of scroll. Lines never wrap (nowrap + a font
  * size chosen so the 800 weight still fits), so nothing reflows while the weight changes.
  */
 export function WeightStatement() {
@@ -43,7 +43,7 @@ export function WeightStatement() {
   }
 
   return (
-    <section ref={ref} aria-label="Statement" className="relative h-[220svh] bg-ink" data-weight-section>
+    <section ref={ref} aria-label="Statement" className="relative h-[185svh] bg-ink" data-weight-section>
       <div className="sticky top-0 flex h-[100svh] flex-col overflow-hidden">
         <div className="wrap flex items-center justify-between pt-24">
           <p className="label">[ Statement ]</p>

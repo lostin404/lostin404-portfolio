@@ -6,7 +6,7 @@ import { useReducedMotion } from 'motion/react'
 gsap.registerPlugin(ScrollTrigger)
 
 /** How much vertical scroll one pixel of horizontal travel costs (lower = faster read). */
-const SCROLL_PER_PX = 0.3
+const SCROLL_PER_PX = 0.24
 
 const SENTENCE =
   'Beyond the ordinary, beyond the expected, FIND YOURSELF IN GLITCH, explore a world where creativity meets experimentation, ideas become experiences, and every pixel tells a different story. BEYOND_404'

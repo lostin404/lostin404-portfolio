@@ -6,6 +6,7 @@ import { HorizontalManifesto } from '../components/HorizontalManifesto'
 import { Portal } from '../components/Portal'
 import { SelectedPreviews } from '../components/Work'
 import { CharacterBlurReveal } from '../components/CharacterBlurReveal'
+import { CreativeDrops } from '../components/CreativeDrops'
 import { CtaBand } from '../components/CtaBand'
 import { Reveal } from '../components/Reveal'
 import { useSeo } from '../hooks/useSeo'
@@ -86,10 +87,7 @@ function Explore() {
 }
 
 export default function Home() {
-  useSeo(
-    'LOSTIN404 — Find Yourself in Glitch',
-    'LOSTIN404 is the Dubai-based design brand of Suhail Ameer — premium brand visuals, cinematic content, web experiences and social media strategy.',
-  )
+  useSeo('/')
   return (
     <>
       <Hero />
@@ -99,6 +97,7 @@ export default function Home() {
       <Explore />
       <Portal />
       <SelectedPreviews />
+      <CreativeDrops />
       <CtaBand
         label="[ Contact ]"
         title="Let's build something cinematic."

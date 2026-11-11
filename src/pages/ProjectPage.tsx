@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ClipReveal } from '../components/ClipReveal'
 import { TypeCover } from '../components/ProjectCard'
 import { Reveal } from '../components/Reveal'
+import { ProjectSections } from '../components/ProjectSections'
+import { useSeo } from '../hooks/useSeo'
 import { brand, projects } from '../data/site'
+import { projectDetails } from '../data/projectDetails'
 import NotFound from './NotFound'
 
 export default function ProjectPage() {
@@ -12,12 +14,7 @@ export default function ProjectPage() {
   const index = projects.findIndex((p) => p.slug === slug)
   const project = projects[index]
 
-  useEffect(() => {
-    if (project) document.title = `${project.title} — ${brand.name}`
-    return () => {
-      document.title = `${brand.name} — Find Yourself in Glitch`
-    }
-  }, [project])
+  useSeo(project ? `/work/${project.slug}` : '/work/not-found', { noindex: !project })
 
   if (!project) return <NotFound />
 
@@ -109,6 +106,16 @@ export default function ProjectPage() {
             ))}
           </ul>
         )}
+
+        <ProjectSections
+          details={projectDetails[project.slug]}
+          mobile={project.mobile}
+          live={
+            external
+              ? { url: external, domain: project.domain, label: isSite ? 'View live website' : 'View on Instagram' }
+              : undefined
+          }
+        />
 
         {!project.cover && external && (
           <p className="label mt-6">

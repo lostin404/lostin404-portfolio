@@ -73,7 +73,7 @@ export function Portal() {
     <section
       ref={ref}
       aria-label="Selected work — featured project"
-      className="relative h-[260svh] bg-deep"
+      className="relative h-[215svh] bg-deep"
       data-portal
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden">

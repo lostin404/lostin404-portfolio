@@ -8,10 +8,7 @@ import { useSeo } from '../hooks/useSeo'
 import { brand } from '../data/site'
 
 export default function AboutPage() {
-  useSeo(
-    'About — LOSTIN404',
-    'Suhail Ameer is the Dubai-based creative director and designer behind LOSTIN404 — brand visuals, web design, cinematic content and social strategy.',
-  )
+  useSeo('/about')
   return (
     <>
       <PageHeader

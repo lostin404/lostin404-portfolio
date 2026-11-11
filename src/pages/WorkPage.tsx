@@ -6,10 +6,7 @@ import { useSeo } from '../hooks/useSeo'
 import { projects } from '../data/site'
 
 export default function WorkPage() {
-  useSeo(
-    'Work — LOSTIN404',
-    'Selected LOSTIN404 projects: brand identity, live client websites for LACABITE UAE, MealsKart, AAJEL Business and Nelta Tech, and social content.',
-  )
+  useSeo('/work')
   return (
     <>
       <PageHeader

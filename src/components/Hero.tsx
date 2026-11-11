@@ -5,7 +5,9 @@ import { Aurora } from './Aurora'
 import { CharacterBlurReveal } from './CharacterBlurReveal'
 import { ClipReveal } from './ClipReveal'
 import { EASE } from './Reveal'
-import { brand } from '../data/site'
+import { brand, projects } from '../data/site'
+
+const FEATURED = projects.filter((p) => ['lacabite-uae', 'mealskart', 'aajel-business'].includes(p.slug))
 
 export function Hero() {
   const reduce = useReducedMotion()
@@ -82,7 +84,21 @@ export function Hero() {
           </div>
         </div>
 
-        <motion.div {...rise(1.05)} className="hairline mt-10 flex items-center justify-between gap-6 pt-5">
+        {/* shortcut to the selected work, so it is one tap away instead of several screens of scroll */}
+        <motion.nav
+          {...rise(1)}
+          aria-label="Featured projects"
+          className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 md:justify-end"
+        >
+          <span className="label">Featured —</span>
+          {FEATURED.map((p) => (
+            <Link key={p.slug} to={`/work/${p.slug}`} className="label link-underline !text-bone/85 py-1.5">
+              {p.title}
+            </Link>
+          ))}
+        </motion.nav>
+
+        <motion.div {...rise(1.05)} className="hairline mt-6 flex items-center justify-between gap-6 pt-5">
           <p className="label">Brand visuals · Cinematic content · Web · Social</p>
           <p className="label hidden sm:block">{brand.signature}</p>
           <p className="label">Scroll ↓</p>

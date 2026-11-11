@@ -62,8 +62,11 @@ export function ProjectGrid() {
   const count = (id: string) => (id === 'all' ? projects.length : projects.filter((p) => p.discipline === id).length)
 
   return (
-    <section className="bg-ink pb-[var(--section-y)] pt-12 md:pt-16" aria-label="Projects">
+    <section className="bg-ink pb-[var(--section-y)] pt-12 md:pt-16" aria-labelledby="projects-title">
       <div className="wrap">
+        <h2 id="projects-title" className="sr-only">
+          All projects
+        </h2>
         <div
           role="group"
           aria-label="Filter projects by discipline"

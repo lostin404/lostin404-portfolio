@@ -102,8 +102,8 @@ export function ServiceCards() {
             <li key={s.no}>
               <Reveal delay={(i % 2) * 0.08} className="h-full">
                 <Link
-                  to="/contact"
-                  aria-label={`${s.title} — enquire`}
+                  to={`/contact?service=${s.id}`}
+                  aria-label={`${s.title} — enquire about this service`}
                   className="glass glass-hover group flex h-full min-h-[22rem] flex-col rounded-[14px] p-6 md:p-8"
                   data-service-card
                 >
@@ -117,7 +117,8 @@ export function ServiceCards() {
                     {s.title}
                   </h2>
                   <p className="mt-3 max-w-[30rem] text-mute">{s.text}</p>
-                  <ul className="mt-auto flex flex-wrap gap-2 pt-10">
+                  <p className="label mt-auto pt-10">What you get</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
                     {s.tags.map((t) => (
                       <li key={t} className="label rounded-full border border-line px-3 py-1.5 !text-bone/80">
                         {t}

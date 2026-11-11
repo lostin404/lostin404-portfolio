@@ -15,13 +15,89 @@ const outFile = path.join(root, 'src', 'data', 'aboutGallery.ts')
 
 const IMAGE = /\.(jpe?g|png|webp|avif)$/i
 
-/** Optional per-file details: { title, category, alt, objectPosition } */
+/** Per-file details: { title, category, alt, objectPosition } — keyed by exact file name */
 const OVERRIDES = {
-  // subject sits low in the frame — keep the face in view when the photo is cropped
-  'file_000000009738720a85c9c3447cc1ccd5.png': { objectPosition: 'center 92%' },
-  'file_00000000b6f882468bc9103d6df58ba2.png': { objectPosition: 'center 62%' },
-  '1772594748050~2.png': { objectPosition: 'center 40%' },
-  '1790948144385.jpg': { objectPosition: 'center 32%' },
+  // Captions and alt text describe what is visible in each photo (checked by eye, not guessed from file names).
+  // objectPosition keeps the face in view when the photo is cropped.
+  '1770055752365~3.png': {
+    title: 'Teal sky, beige sweater',
+    category: 'Portrait',
+    alt: 'Low-angle portrait of a man in a beige sweater leaning on a ledge against a bright teal wall, looking off to the side',
+  },
+  '1772594748050~2.png': {
+    title: 'Steel lift',
+    category: 'Portrait',
+    objectPosition: 'center 40%',
+    alt: 'A man in a white t-shirt and black trousers leaning on the handrail of a grey steel lift under a skylight',
+  },
+  '1773808108325~2.png': {
+    title: 'Concrete and shadow',
+    category: 'Portrait',
+    alt: 'Moody portrait of a bearded man in a black coat, head bowed, against a green-grey concrete wall',
+  },
+  '1776161051326.png': {
+    title: 'Wood panel, red jersey',
+    category: 'Portrait',
+    alt: 'A man in a red, white and black retro football-style jersey standing against a warm wood-panelled wall',
+  },
+  '1781916206050.png': {
+    title: 'Green hoodie',
+    category: 'Portrait',
+    alt: 'A bearded man in a green hooded sweatshirt and matching joggers, seated and looking at the camera against a grey backdrop',
+  },
+  '1785277130511~2.png': {
+    title: 'Window light',
+    category: 'Lifestyle',
+    alt: 'A man in a striped shirt and jeans standing beside a tall window with garden greenery outside, looking away from the camera',
+  },
+  '1787101110865~2.jpg': {
+    title: 'Black knit, white wall',
+    category: 'Headshot',
+    alt: 'Headshot of a smiling bearded man in a black knit sweater against a plain white wall',
+  },
+  '1787873395738~3.jpg': {
+    title: 'Dusk skyline',
+    category: 'Portrait',
+    alt: 'A man in a pink washed hoodie standing on a rooftop at dusk with power lines and a distant city skyline behind him',
+  },
+  '1788996841797~2.jpg': {
+    title: 'Crows and snow',
+    category: 'Cinematic',
+    alt: 'Cinematic portrait of a man in a dark coat looking up, with a flock of crows and falling snow in a grey sky',
+  },
+  '1790948144385.jpg': {
+    title: 'Street style',
+    category: 'Lifestyle',
+    objectPosition: 'center 32%',
+    alt: 'A man in dark clothes and sunglasses adjusting his glasses as he walks in front of a parked black car',
+  },
+  'file_00000000129c71f484861951cfc5dfdf.png': {
+    title: 'Studio, green set',
+    category: 'Portrait',
+    alt: 'Studio portrait of a bearded man in a green hoodie and tracksuit seated on a wooden stool, white trainers on the floor',
+  },
+  'file_000000006e9c8246af87e0ac813a3626.png': {
+    title: 'RELENTLESS poster',
+    category: 'Poster design',
+    alt: 'Red, black and white poster with a grayscale portrait of a bearded man and the headline RELENTLESS, with the line Control the noise. Own the moment.',
+  },
+  'file_0000000089688246a5723a0f7d5b0700.png': {
+    title: 'Plaid shirt',
+    category: 'Lifestyle',
+    alt: 'A man in an orange and yellow plaid shirt and light jeans leaning against a ribbed metal wall with plants beside it',
+  },
+  'file_000000009738720a85c9c3447cc1ccd5.png': {
+    title: 'Under the blue',
+    category: 'Portrait',
+    objectPosition: 'center 92%',
+    alt: 'A man in a striped shirt looking up at a deep blue sky, framed low at the bottom of the photo',
+  },
+  'file_00000000b6f882468bc9103d6df58ba2.png': {
+    title: 'Monochrome',
+    category: 'Portrait',
+    objectPosition: 'center 62%',
+    alt: 'Black and white portrait of a bearded man in a black knit sweater with a hard shadow on the wall behind him',
+  },
 }
 
 const files = (await readdir(galleryDir)).filter((f) => IMAGE.test(f)).sort((a, b) => a.localeCompare(b, 'en'))

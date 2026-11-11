@@ -1,10 +1,11 @@
 import { useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { ArrowUpRight, Mail, MapPin, MessageCircle } from 'lucide-react'
 import { SocialIcon } from '../SocialIcon'
-import { brand } from '../../data/site'
+import { brand, services } from '../../data/site'
 
-export type ContactFormValues = { name: string; email: string; message: string }
-type Field = keyof ContactFormValues
+export type ContactFormValues = { name: string; email: string; message: string; service?: string }
+type Field = 'name' | 'email' | 'message'
 type Errors = Partial<Record<Field, string>>
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -25,6 +26,7 @@ export function buildEnquiry(v: ContactFormValues) {
     '',
     `*Name:* ${v.name}`,
     `*Email:* ${v.email}`,
+    ...(v.service ? [`*Service:* ${v.service}`] : []),
     '',
     '*Message:*',
     v.message,
@@ -43,17 +45,24 @@ function FieldBlock({
   id,
   label,
   error,
+  optional,
   children,
 }: {
   id: string
   label: string
   error?: string
+  optional?: boolean
   children: ReactNode
 }) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="label !text-bone/80">
-        {label} <span aria-hidden="true">*</span>
+        {label}{' '}
+        {optional ? (
+          <span className="normal-case tracking-normal text-mute">(optional)</span>
+        ) : (
+          <span aria-hidden="true">*</span>
+        )}
       </label>
       {children}
       <p id={`${id}-error`} className="min-h-[1.25rem] text-[0.8125rem] text-[#ff8a8a]" aria-live="polite">
@@ -62,6 +71,10 @@ function FieldBlock({
     </div>
   )
 }
+
+/** Chevron for the native select (appearance-none hides the browser's own arrow). */
+const SELECT_ARROW =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EDE7DC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")"
 
 const inputClass =
   'w-full rounded-xl border border-line bg-ink/60 px-4 py-3 text-base text-bone sm:text-[0.9375rem] placeholder:text-mute/60 outline-none transition-[border-color,box-shadow,background-color] duration-300 ease-expo hover:border-line-strong focus:border-volt-2 focus:bg-ink/80 focus:shadow-[0_0_0_3px_rgba(82,39,255,0.3)] aria-[invalid=true]:border-[#ff8a8a]/70'
@@ -76,7 +89,10 @@ const inputClass =
  */
 export function ContactForm() {
   const uid = useId()
-  const ids = { name: `${uid}-name`, email: `${uid}-email`, message: `${uid}-message` }
+  const ids = { name: `${uid}-name`, email: `${uid}-email`, message: `${uid}-message`, service: `${uid}-service` }
+  // /contact?service=web (from a service card) pre-selects that service; the visitor can change or clear it
+  const [params] = useSearchParams()
+  const preselected = services.find((s) => s.id === params.get('service'))?.title ?? ''
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<Status>({ state: 'idle' })
   const busy = useRef(false)
@@ -88,6 +104,7 @@ export function ContactForm() {
       name: String(data.get('name') ?? '').trim(),
       email: String(data.get('email') ?? '').trim(),
       message: String(data.get('message') ?? '').trim(),
+      service: String(data.get('service') ?? '').trim() || undefined,
     }
   }
 
@@ -105,7 +122,7 @@ export function ContactForm() {
     const values = read()
     const found = validate(values)
     setErrors(found)
-    const first = (Object.keys(ids) as Field[]).find((f) => found[f])
+    const first = (['name', 'email', 'message'] as Field[]).find((f) => found[f])
     if (first) {
       document.getElementById(ids[first])?.focus()
       setStatus({ state: 'idle' })
@@ -219,6 +236,23 @@ export function ContactForm() {
               />
             </FieldBlock>
           </div>
+          <FieldBlock id={ids.service} label="Service" optional>
+            <select
+              id={ids.service}
+              name="service"
+              defaultValue={preselected}
+              style={{ backgroundImage: SELECT_ARROW }}
+              className={`${inputClass} appearance-none bg-[length:1rem] bg-[position:right_1rem_center] bg-no-repeat pr-10`}
+            >
+              <option value="">Not sure yet</option>
+              {services.map((s) => (
+                <option key={s.id} value={s.title}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+            <p className="min-h-[1.25rem]" aria-hidden="true" />
+          </FieldBlock>
           <FieldBlock id={ids.message} label="Message" error={errors.message}>
             <textarea
               id={ids.message}

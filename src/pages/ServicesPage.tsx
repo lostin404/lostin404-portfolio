@@ -1,14 +1,12 @@
 import { PageHeader } from '../components/PageHeader'
 import { ServiceCards } from '../components/About'
+import { WorkingProcess } from '../components/WorkingProcess'
 import { CtaBand } from '../components/CtaBand'
 import { useSeo } from '../hooks/useSeo'
 import { services } from '../data/site'
 
 export default function ServicesPage() {
-  useSeo(
-    'Services — LOSTIN404',
-    'LOSTIN404 services: web design and development, premium brand visuals, social media management, and UAE business setup assistance.',
-  )
+  useSeo('/services')
   return (
     <>
       <PageHeader
@@ -19,6 +17,7 @@ export default function ServicesPage() {
         <p className="label">{String(services.length).padStart(2, '0')} services — one studio</p>
       </PageHeader>
       <ServiceCards />
+      <WorkingProcess />
       <CtaBand
         label="[ Enquiries ]"
         title="Get a custom quote."

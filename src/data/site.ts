@@ -7,6 +7,9 @@ import mealskart1 from '../assets/img/site-mealskart-1.webp'
 import mealskart2 from '../assets/img/site-mealskart-2.webp'
 import aajel1 from '../assets/img/site-aajel-1.webp'
 import aajel2 from '../assets/img/site-aajel-2.webp'
+import lacabiteMobile from '../assets/img/site-lacabite-mobile.webp'
+import mealskartMobile from '../assets/img/site-mealskart-mobile.webp'
+import aajelMobile from '../assets/img/site-aajel-mobile.webp'
 import nelta1 from '../assets/img/site-nelta-1.webp'
 import projectSocial from '../assets/img/project-social.webp'
 import gallery1 from '../assets/img/gallery-1.webp'
@@ -15,6 +18,7 @@ import gallery3 from '../assets/img/gallery-3.webp'
 import gallery4 from '../assets/img/gallery-4.webp'
 import gallery5 from '../assets/img/gallery-5.webp'
 import gallery6 from '../assets/img/gallery-6.webp'
+import dropRelentless from '../assets/img/drop-relentless.webp'
 import portrait from '../assets/img/feed-1.webp'
 
 /** `position` sets object-position when the image is cropped (used for site screenshots). */
@@ -69,6 +73,8 @@ export type Project = {
   summary: string
   cover?: Img
   gallery: Img[]
+  /** phone-width screenshot of the live site (390px viewport) */
+  mobile?: Img
   url?: string
   domain?: string
 }
@@ -108,6 +114,7 @@ export const projects: Project[] = [
         position: 'left top',
       },
     ],
+    mobile: { src: lacabiteMobile, alt: 'Lacabite homepage on a phone — Premium Bakery & Sweets in Dubai, with Explore Menu and Get A Quotation buttons', w: 620, h: 1342 },
     url: 'https://lacabiteuae.ae/',
     domain: 'lacabiteuae.ae',
   },
@@ -133,6 +140,7 @@ export const projects: Project[] = [
         position: 'left top',
       },
     ],
+    mobile: { src: mealskartMobile, alt: 'MealsKart homepage on a phone — The Taste of Home, Delivered Every Day, with View Meal Plans and Order on WhatsApp buttons', w: 620, h: 1342 },
     url: 'https://www.mealskart.ae/',
     domain: 'mealskart.ae',
   },
@@ -158,6 +166,7 @@ export const projects: Project[] = [
         position: 'left top',
       },
     ],
+    mobile: { src: aajelMobile, alt: 'AAJEL homepage on a phone — Business Growth With Expert Consultancy, with Start Your Business Setup and Get Free Consultation buttons', w: 620, h: 1342 },
     url: 'https://aajelbusiness.com/',
     domain: 'aajelbusiness.com',
   },
@@ -231,24 +240,28 @@ export const archive: { title: string; category: string; image: Img }[] = [
 export const services = [
   {
     no: '01',
+    id: 'web',
     title: 'Web Design & Development',
     text: 'Modern responsive websites, portfolio sites, business websites. Fast, clean, and built to perform.',
     tags: ['Custom Design', 'Responsive Build', 'SEO Optimized', 'Fast Loading'],
   },
   {
     no: '02',
+    id: 'brand',
     title: 'Premium Brand Visuals',
     text: 'Logos, posters, mockups, and high-end visual identity assets that define your brand.',
     tags: ['Logo Design', 'Brand Identity', 'Print Design', 'Mockups'],
   },
   {
     no: '03',
+    id: 'social',
     title: 'Social Media Management',
     text: 'Content creation, optimization, posting strategy for Instagram, Pinterest & YouTube.',
     tags: ['Content Creation', 'Growth Strategy', 'Analytics', 'Community'],
   },
   {
     no: '04',
+    id: 'setup',
     title: 'Business Setup Services',
     text: 'Document clearing and business setup assistance for UAE-based ventures.',
     tags: ['Trade License', 'Document Clearing', 'PRO Services', 'Consultation'],
@@ -315,4 +328,60 @@ export const nav = [
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
   { label: 'Contact', path: '/contact' },
+]
+
+/** How an enquiry becomes a project — the order of the studio's usual working process. */
+export const workflow = [
+  { title: 'Enquire', text: 'Send the form or a WhatsApp message with what you need and where you are based.' },
+  { title: 'Consult', text: 'We talk through goals, scope and timing so the work is clear before it starts.' },
+  { title: 'Quote', text: 'You receive a custom quote for exactly what was agreed.' },
+  { title: 'Create', text: 'Design and build, with the work shared for your review along the way.' },
+  { title: 'Launch', text: 'Final adjustments, then the work goes live or is delivered.' },
+]
+
+/**
+ * Home — Latest Creative Drops. Existing LOSTIN404 artwork only, each linked to its project page or
+ * to the verified Instagram profile. The first item is shown large.
+ */
+export const drops: { title: string; category: string; image: Img; href: string; linkLabel: string }[] = [
+  {
+    title: 'RELENTLESS',
+    category: 'Poster design',
+    image: {
+      src: dropRelentless,
+      alt: 'Red, black and white poster with a grayscale portrait and the headline RELENTLESS, with the line Control the noise. Own the moment.',
+      w: 720,
+      h: 900,
+    },
+    href: 'https://www.instagram.com/lostin___404',
+    linkLabel: 'see more on Instagram',
+  },
+  {
+    title: 'Typography Poster',
+    category: 'Typography',
+    image: { src: gallery5, alt: 'Typography poster in red and white on charcoal', w: 1024, h: 1024 },
+    href: '/work/lostin404-branding',
+    linkLabel: 'LOSTIN404 Branding project',
+  },
+  {
+    title: 'Brand Identity System',
+    category: 'Branding',
+    image: { src: gallery2, alt: 'Red and black business card set', w: 1024, h: 1024 },
+    href: '/work/lostin404-branding',
+    linkLabel: 'LOSTIN404 Branding project',
+  },
+  {
+    title: 'Dubai Nightscape',
+    category: 'Photo edits',
+    image: { src: gallery4, alt: 'Dubai skyline at night with red-lit towers', w: 1024, h: 1024 },
+    href: 'https://www.instagram.com/lostin___404',
+    linkLabel: 'see more on Instagram',
+  },
+  {
+    title: 'Social Media Kit',
+    category: 'Social media',
+    image: { src: gallery6, alt: 'Social media kit with phones and red stationery', w: 1024, h: 1024 },
+    href: '/work/lostin404-social',
+    linkLabel: 'LOSTIN404 Social project',
+  },
 ]
