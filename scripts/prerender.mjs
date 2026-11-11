@@ -3,7 +3,7 @@
 //
 // Why: the site is a client-rendered SPA, so crawlers and link-preview bots that do not run
 // JavaScript would otherwise see the home page's metadata for every URL. Netlify serves a real
-// file before applying the SPA fallback, so dist/work/index.html answers /work, and so on.
+// file before applying the SPA fallback, so dist/work.html answers /work, and so on.
 // The React app still boots normally on top and keeps the metadata current via useSeo.
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -54,7 +54,10 @@ function render(route) {
 
 let written = 0
 for (const route of routes) {
-  const file = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route, 'index.html')
+  // Flat files (dist/work.html, dist/work/mealskart.html) rather than folder/index.html: hosts serve
+  // /work from work.html directly, while a folder index makes Netlify 301 to a trailing-slash URL
+  // that no longer matches the canonical.
+  const file = route === '/' ? path.join(dist, 'index.html') : path.join(dist, `${route.slice(1)}.html`)
   await mkdir(path.dirname(file), { recursive: true })
   await writeFile(file, render(route))
   written++
